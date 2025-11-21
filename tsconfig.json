@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node", "@playwrig/test"],
+    "baseUrl": "./",
+    "paths": {
+      "@core/*": ["src/core/*"],
+      "@utils/*": ["src/core/utils/*"],
+      "@fixtures/*": ["src/core/fixtures/*"],
+      "@projects/*": ["src/projects/*"]
+    }
+  },
+
+  "include": ["src", "config"]
+}
