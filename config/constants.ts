@@ -5,6 +5,6 @@ export const TIMEOUTS = {
 };
 
 export const CREDENTIALS = {
-  OPENCART_EMAIL: "placeHolder for email",
-  OPENCART_PASSWORD: "PlaceHolder for password",
+  OPENCART_EMAIL: "asifkhan@auto.com",
+  OPENCART_PASSWORD: "automation@123",
 };

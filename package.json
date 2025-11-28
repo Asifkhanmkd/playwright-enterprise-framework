@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Enterprise-Grade Playwright Typescript automation framework ",
   "scripts": {
-    "test": "playwright test",
+    "test": "playwright test --config=config/playwright.config.ts",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug"
   },

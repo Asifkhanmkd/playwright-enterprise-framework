@@ -4,14 +4,14 @@ import { getEnv } from "./test.env";
 const env = getEnv();
 
 export default defineConfig({
-  testDir: "./src",
+  testDir: "../src",
   timeout: 30000,
   retries: env.RETRIES,
   reporter: [["html", { outputFolder: "playwright_report" }]],
 
   use: {
     baseURL: env.BASE_URL,
-    headless: true,
+    headless: false,
     screenshot: "only-on-failure",
     video: "retain-on-failure",
     trace: "retain-on-failure",
