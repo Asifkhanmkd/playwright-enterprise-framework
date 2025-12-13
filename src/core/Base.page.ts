@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
-
+import { logger } from "./utils/logger";
 type LocatorEntry = Locator | ((...args: any[]) => Locator);
 
 export abstract class BasePage {
@@ -10,6 +10,10 @@ export abstract class BasePage {
     this.page = page;
   }
 
+  public getPage(): Page {
+    return this.page;
+  }
+
   // Navigating To AUT (Application Under Test)
 
   async navigateTo(path: string): Promise<void> {
@@ -17,6 +21,7 @@ export abstract class BasePage {
       waitUntil: "domcontentloaded",
       timeout: 10_000,
     });
+    logger.info(`Navigated to ${path}`);
   }
 
   // Centralizer locator Resolver
@@ -25,6 +30,7 @@ export abstract class BasePage {
     const entry = this.locatorMap[key];
 
     if (!entry) {
+      logger.error(`Locator not found: ${key}`);
       throw new Error(
         `No locator found for the key: "${key}" in ${this.constructor.name}`
       );
@@ -40,15 +46,18 @@ export abstract class BasePage {
     const locator = this.resolveLocator(key, ...args);
     await locator.waitFor({ state: "visible" });
     await locator.click();
+    logger.info(`Clicked on ${key}`);
   }
 
   async fill(key: string, value: string, ...args: any[]): Promise<void> {
     const locator = this.resolveLocator(key, ...args);
     await locator.waitFor({ state: "visible" });
     await locator.fill(value);
+    logger.info(`[${value}] filled in ${key}`);
   }
 
   async assertVisibility(key: string, ...args: any[]): Promise<void> {
+    logger.info(`ASSERT VISIBLE → ${key}`);
     const locator = this.resolveLocator(key, ...args);
     await expect(locator).toBeVisible();
   }
