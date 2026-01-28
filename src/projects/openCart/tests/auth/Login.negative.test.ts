@@ -23,6 +23,7 @@ test.describe("Login - Negative Scenarios", () => {
   test("TC-05: login fails with empty credentials", async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.openLogin();
+    await loginPage.login("", "");
     await loginPage.clickOnlogButton();
 
     await loginPage.expectLoginErrorMessage();

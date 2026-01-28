@@ -2,13 +2,17 @@ node_modules/
 test-results/
 playwright-report/
 playwright/.cache/
+config/playwright_report/
 html-report/
 allure-results/
 allure-report/
 .env
 .env.*
 *.log
+logs/
 .DS_Store
 Thumbs.db
 Storage/
+storage/
 sandbox/
+blob-report/
