@@ -1,19 +1,17 @@
 import { test as base } from "@playwright/test";
 import { logger } from "./utils/logger";
 
-export const test = base;
-export const expect = base.expect;
+// ❗ FIX: create a new extended test object
+export const test = base.extend({});
 
-test.beforeEach(async () => {
-  console.log("🔵 Test Started");
-  logger.info("🔵 Test Started");
-});
+(test as any)._fingerprint = "HOOKS_INSTANCE_" + Math.random();
+
+console.log(
+  `[DEBUG] hooks.ts loaded. Fingerprint: ${(test as any)._fingerprint}`
+);
 
 test.afterEach(async ({ page }, testInfo) => {
   if (testInfo.status !== testInfo.expectedStatus) {
-    console.log(`🔴 Test Failed: ${testInfo.title}`);
-    logger.error(`🔴 Test Failed: ${testInfo.title}`);
-
     const screenshot = await page.screenshot();
     await testInfo.attach("Screenshot of failed test", {
       body: screenshot,
@@ -21,3 +19,5 @@ test.afterEach(async ({ page }, testInfo) => {
     });
   }
 });
+
+export const expect = test.expect;

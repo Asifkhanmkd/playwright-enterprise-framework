@@ -13,7 +13,8 @@
       "@core/*": ["src/core/*"],
       "@utils/*": ["src/core/utils/*"],
       "@fixtures/*": ["src/core/fixtures/*"],
-      "@projects/*": ["src/projects/*"]
+      "@projects/*": ["src/projects/*"],
+      "@config/*": ["config/*"]
     }
   },
 

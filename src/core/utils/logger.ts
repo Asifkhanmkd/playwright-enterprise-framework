@@ -17,7 +17,7 @@ class Logger {
   }
 
   private write(level: LogLevel, message: string) {
-    const timeStamp = new Date().toISOString;
+    const timeStamp = new Date().toISOString();
     const formattedMessge = `[${timeStamp}] [${level}] ${message}\n`;
 
     if (level === "ERROR") {
