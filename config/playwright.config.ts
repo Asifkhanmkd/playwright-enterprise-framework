@@ -9,7 +9,7 @@ export default defineConfig({
   timeout: 30000,
   retries: env.RETRIES,
   reporter: [
-    ["list", { printConsole: true}],
+    ["list", { printConsole: true }],
     ["html", { outputFolder: "playwright_report", open: "never" }],
     ["../src/core/reporters/enterpriseReporter.ts"],
   ],
@@ -18,7 +18,7 @@ export default defineConfig({
 
   use: {
     baseURL: env.BASE_URL,
-    headless: false,
+    headless: process.env.CI === "true",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
     trace: "retain-on-failure",
