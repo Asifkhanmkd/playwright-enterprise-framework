@@ -6,6 +6,7 @@ import { CREDENTIALS } from "@config/constants";
 export const test = baseTest.extend<{ pageWithLogin: Page }>({
   pageWithLogin: async ({ page, loginPage }, use) => {
     await loginPage.openLogin();
+    
     await loginPage.login(
       CREDENTIALS.OPENCART_EMAIL,
       CREDENTIALS.OPENCART_PASSWORD

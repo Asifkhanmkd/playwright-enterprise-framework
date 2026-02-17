@@ -5,8 +5,6 @@ export const TIMEOUTS = {
 };
 
 export const CREDENTIALS = {
-  OPENCART_EMAIL: "asifkhan@auto.com",
-  OPENCART_PASSWORD: "automation@123",
+  OPENCART_EMAIL: "autoplay@automation.com",
+  OPENCART_PASSWORD: "auto1234",
 };
-
-

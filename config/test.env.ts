@@ -14,6 +14,6 @@ export function getEnv() {
 
   return {
     BASE_URL: process.env.BASE_URL!,
-    RETRIES: Number(process.env.RETRIES || 0),
+   // RETRIES: Number(process.env.RETRIES || 0),
   };
 }

@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
-import { logger } from "./utils/logger";
+//import { logger } from "@core/utils/logger";
 import { Routes } from "@core/types/routes";
 type LocatorEntry = Locator | ((...args: any[]) => Locator);
 
@@ -28,12 +28,12 @@ export abstract class BasePage {
     logger.info(`Current URL: ${this.page.url()}`);
   } */
 
-
-  protected async goTo(route:Routes){
-    await this.page.goto(route,{
-    waitUntil: "domcontentloaded",
-    timeout: 15000
-    })
+  protected async goTo(route: Routes) {
+    //logger.info(`Navigating to page: ${route}`)
+    await this.page.goto(route, {
+      waitUntil: "domcontentloaded",
+      timeout: 15000,
+    });
   }
 
   // Centralizer locator Resolver
@@ -42,9 +42,9 @@ export abstract class BasePage {
     const entry = this.locatorMap[key];
 
     if (!entry) {
-      logger.error(`Locator not found: ${key}`);
+      //logger.error(`Locator not found: ${key}`);
       throw new Error(
-        `No locator found for the key: "${key}" in ${this.constructor.name}`
+        `No locator found for the key: "${key}" in ${this.constructor.name}`,
       );
     }
 
@@ -95,10 +95,10 @@ export abstract class BasePage {
 
   async assertVisibility(key: string, ...args: any[]): Promise<void> {
     const locator = this.resolveLocator(key, ...args);
-    logger.info(`Asserting visibility of ${key} (${args.join(", ")})`);
+    //logger.info(`Asserting visibility of ${key} (${args.join(", ")})`);
     await expect(
       locator,
-      `Expected "${key}" to be visible in ${this.constructor.name}`
+      `Expected "${key}" to be visible in ${this.constructor.name}`,
     ).toBeVisible({ timeout: 10000 });
   }
 
@@ -107,7 +107,7 @@ export abstract class BasePage {
 
     await expect(
       locator,
-      `Expected "${key}" to be hidden in "${this.constructor.name}"`
+      `Expected "${key}" to be hidden in "${this.constructor.name}"`,
     ).toBeHidden({ timeout: 10000 });
   }
 
@@ -120,7 +120,7 @@ export abstract class BasePage {
 
     await expect(
       locator,
-      `Expected "${key}" text to contain "${expected}"`
+      `Expected "${key}" text to contain "${expected}"`,
     ).toContainText(expected, { timeout: 10000 });
   }
 
@@ -135,9 +135,9 @@ export abstract class BasePage {
 
     expect(
       count,
-      `Expected "${key}" count to be "${expected}" but got ${count}`
+      `Expected "${key}" count to be "${expected}" but got ${count}`,
     ).toBe(expected);
 
-    logger.info(`The number of Products returned are "${count}"`);
+    //logger.info(`The number of Products returned are "${count}"`);
   }
 }

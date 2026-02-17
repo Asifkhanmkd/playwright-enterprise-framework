@@ -11,35 +11,6 @@ type AuthFixtures = {
   productPageWithAuth: ProductPage;
 };
 
-/* export const test = baseTest.extend<AuthFixtures>({
-  storageState: async ({ browser }, use) => {
-    const context = await browser.newContext({
-      storageState: STORAGE_STATE_PATH,
-    });
-    const page = await context.newPage();
-
-    const isFresh = await isAuthStateFresh(browser);
-    await context.close();
-
-    await use(isFresh ? STORAGE_STATE_PATH : undefined);
-  },
-
-  authPage: async ({ page }, use) => {
-    await use(page);
-  },
-
-  productPageWithAuth: async ({ authPage }, use) => {
-    await use(new ProductPage(authPage));
-  },
-});
-
-// propagate fingerprint
-(test as any)._fingerprint = (baseTest as any)._fingerprint;
-
-export const expect = test.expect;
- */
-
-
 export const test = baseTest.extend<AuthFixtures>({
   // 🔑 AUTH DECISION (before context creation)
   storageState: isAuthStateFresh() ? STORAGE_STATE_PATH : undefined,

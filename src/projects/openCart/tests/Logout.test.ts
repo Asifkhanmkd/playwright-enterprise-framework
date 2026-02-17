@@ -1,9 +1,10 @@
 import { test, expect } from "@core/authFixture";
 import { Routes } from "@core/types/routes";
 
-test("TC-06: user can logout successfully", async ({
+test("@smoke @critical TC-06: user can logout successfully", async ({
   authPage,
   dashboardPage,
+  logger,
 }) => {
   await authPage.goto(Routes.ACCOUNT);
   // Act: click logout
