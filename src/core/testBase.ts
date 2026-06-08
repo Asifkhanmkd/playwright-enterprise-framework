@@ -23,3 +23,4 @@ export const test = base.extend<{
 (test as any)._fingerprint = (base as any)._fingerprint;
 
 export const expect = test.expect;
+

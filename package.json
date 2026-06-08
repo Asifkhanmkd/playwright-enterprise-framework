@@ -4,13 +4,20 @@
   "description": "Enterprise-Grade Playwright Typescript automation framework ",
   "scripts": {
     "test": "playwright test --config=config/playwright.config.ts",
-    "test:headed": "playwright test --headed",
-    "test:debug": "playwright test --debug"
+    "test:headed": "playwright test --config=config/playwright.config.ts --headed",
+    "test:debug": "playwright test --config=config/playwright.config.ts --debug",
+    "test:smoke": "playwright test --config=config/playwright.config.ts --grep @smoke",
+    "test:regression": "playwright test --config=config/playwright.config.ts --grep @regression",
+    "test:critical": "playwright test --config=config/playwright.config.ts --grep @critical"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.10.1",
+    "@types/uuid": "^11.0.0",
     "dotenv": "17.2.3",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "uuid": "^13.0.0"
   }
 }

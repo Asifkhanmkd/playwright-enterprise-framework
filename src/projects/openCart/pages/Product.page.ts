@@ -1,7 +1,7 @@
 import { Routes } from "@core/types/routes";
 import { BasePage } from "../../../core/Base.page";
 import { Locator, expect, Page } from "@playwright/test";
-import { logger } from "@utils/logger";
+//import { logger } from "@utils/logger";
 
 export class ProductPage extends BasePage {
   protected locatorMap: Record<string, Locator | ((...args: any[]) => Locator)>;
@@ -16,11 +16,11 @@ export class ProductPage extends BasePage {
         page.locator(`.product-thumb:has-text("${productName}") a`).first(),
 
       noMatchingProductMsg: page.locator(
-        "p:has-text('There is no product that matches the search criteria.')"
+        "p:has-text('There is no product that matches the search criteria.')",
       ),
       addToCartButton: (productName: string) =>
         page.locator(
-          `.product-thumb:has-text("${productName}") button:nth-child(1)`
+          `.product-thumb:has-text("${productName}") button:nth-child(1)`,
         ),
 
       cartTotal: page.locator("#cart-total"),
@@ -32,17 +32,17 @@ export class ProductPage extends BasePage {
   }
 
   async searchProduct(searchText: string): Promise<void> {
-    logger.info(`Navigating to ${Routes.HOME}`);
+    // logger.info(`Navigating to ${Routes.HOME}`);
     await this.open();
-    logger.info(`Entering the search term "${searchText}"`);
+    // logger.info(`Entering the search term "${searchText}"`);
     await this.safeFill("searchBox", searchText);
-    logger.info(`Click on search button `);
+    //logger.info(`Click on search button `);
     await this.safeClick("searchButton");
-    logger.info(`Current URL: ${this.page.url()}`);
+    // logger.info(`Current URL: ${this.page.url()}`);
   }
 
   async addProductToCart(productName: string): Promise<void> {
-    logger.info("Clicking on 'addToCartButton'");
+    // logger.info("Clicking on 'addToCartButton'");
     await this.safeClick("addToCartButton", productName);
 
     await this.resolveLocator("cartTotal").waitFor({
@@ -52,13 +52,13 @@ export class ProductPage extends BasePage {
   }
   async getCartTotalText(): Promise<string> {
     const cartTotal = this.resolveLocator("CartTotal");
-    logger.info("Getting the cart total items/value");
+    //logger.info("Getting the cart total items/value");
     const text = await cartTotal.textContent();
     return text ?? "";
   }
 
   async expectProductInResults(productName: string): Promise<void> {
-    logger.info(`Expecting product "${productName}" to appear in results`);
+    //logger.info(`Expecting product "${productName}" to appear in results`);
     await this.assertVisibility("product", productName);
   }
 
@@ -69,7 +69,7 @@ export class ProductPage extends BasePage {
   async expectNoMatchingProductMessage() {
     await this.assertContainsText(
       "noMatchingProductMsg",
-      "There is no product that matches the search criteria."
+      "There is no product that matches the search criteria.",
     );
   }
 }

@@ -1,14 +1,13 @@
-name: Playwright Tests
+name: Main branch pipeline
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  test:
-    name: Run Playwright Tests
+  critical-tests:
+    name: Run Critical Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install dependencies
         run: npm ci
@@ -26,14 +25,16 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run Critical tests
         run: npx playwright test --config=config/playwright.config.ts
         env:
           BASE_URL: https://naveenautomationlabs.com
+          PIPELINE: main
+          TEST_SCOPE: critical
 
-      - name: Upload Playwright report
+      - name: Upload HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright_report
-          path: config/playwright_report/
+          name: critical-html-report
+          path: reports/html/

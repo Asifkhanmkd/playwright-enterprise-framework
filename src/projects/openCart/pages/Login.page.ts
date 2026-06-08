@@ -25,6 +25,7 @@ export class LoginPage extends BasePage {
   } */
 
   async openLogin(): Promise<void> {
+    
     await this.goTo(Routes.HOME);
   }
 
