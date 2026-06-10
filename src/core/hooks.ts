@@ -1,3 +1,5 @@
+//src/core.hooks.ts
+
 import { test as base, chromium } from "@playwright/test";
 import { unifiedLogger } from "./utils/unifiedLogger";
 
@@ -11,7 +13,7 @@ export const test = base.extend<{
 }>({
   logger: async ({}, use, testInfo) => {
     // Create test-specific logger
-    const testLogger = {
+    const testLogger = {      
       info: (msg: string) =>
         unifiedLogger.info(testInfo.testId, testInfo.retry, msg),
       error: (msg: string) =>

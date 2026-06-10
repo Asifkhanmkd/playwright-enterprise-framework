@@ -13,26 +13,5 @@ export function isAuthStateFresh(): boolean {
 
   const { mtimeMs } = fs.statSync(AUTH_STATE_PATH);
 
-  /* if (Date.now() - mtimeMs < MAX_AGE_MS) {
-    console.log("The authState is not fresh");
-    return false; */
-
   return Date.now() - mtimeMs < MAX_AGE_MS;
 }
-
-/* const context = await browser.newContext({storageState: AUTH_STATE_PATH});
-
-  const page = await context.newPage();
-
-  const accountUrl = `https://naveenautomationlabs.com${Routes.ACCOUNT}`;
-
-  await page.goto(accountUrl, { waitUntil: "domcontentloaded" });
-
-  const isValid = page.url().includes("route=account/account");
-   
-  await context.close();
-
-  return isValid;
-
-}
- */

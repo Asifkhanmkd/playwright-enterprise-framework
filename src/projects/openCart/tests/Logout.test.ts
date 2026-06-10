@@ -1,7 +1,7 @@
 import { test, expect } from "@core/authFixture";
 import { Routes } from "@core/types/routes";
 
-test("@smoke @critical TC-06: user can logout successfully", async ({
+test("@smoke @critical @modifies-auth TC-06: user can logout successfully", async ({
   authPage,
   dashboardPage,
   logger,

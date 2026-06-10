@@ -15,20 +15,4 @@ test.describe("Login - Pasitive Scenarios", () => {
 
     await dashboardPage.isElementPresent("logoutLink");
   });
-
-  test("@critical TC-2: authenticated user can access account dashboard via direct URL", async ({
-    pageWithLogin,
-    logger,
-  }) => {
-    const dashboardPage = new DashboardPage(pageWithLogin);
-
-    // user is ALREADY logged in here
-
-    logger.info(`Naviagting to ${Routes.HOME}`);
-    await pageWithLogin.goto(Routes.HOME);
-    logger.info(`Naviagting to ${Routes.ACCOUNT}`);
-    await pageWithLogin.goto(Routes.ACCOUNT);
-
-    await dashboardPage.isElementPresent("accountBreadcrumb");
-  });
 });

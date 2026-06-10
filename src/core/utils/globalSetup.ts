@@ -1,43 +1,32 @@
-/* // src/core/utils/globalSetup.ts
-import fs from "fs";
-import path from "path";
-
-export default async function globalSetup() {
-  // Clean up old logs from previous runs
-  const logsDir = path.join(process.cwd(), "logs");
-  const reportsDir = path.join(process.cwd(), "reports");
-
-  // Keep only last 5 runs
-  if (fs.existsSync(reportsDir)) {
-    const runs = fs
-      .readdirSync(reportsDir)
-      .filter((dir) => dir.startsWith("run-"))
-      .sort()
-      .reverse()
-      .slice(5); // Keep only first 5
-
-    runs.forEach((run) => {
-      const runPath = path.join(reportsDir, run);
-      fs.rmSync(runPath, { recursive: true, force: true });
-    });
-  }
-
-  console.log("Global setup completed - Logging system initialized");
-}
- */
-
 // src/core/globalSetup.ts
+import { CREDENTIALS } from "@config/constants";
+import { chromium } from "@playwright/test";
+import { LoginPage } from "@projects/openCart/pages/Login.page";
 import fs from "fs";
 import path from "path";
+import { getEnv } from "@config/test.env";
+import { cleanDirectory } from "@core/utils/cleanup.utils";
 
 export default async function globalSetup() {
   console.log("🚀 Global Setup: Initializing enterprise logging framework");
-
+  const env = getEnv();
   const logsDir = path.join(process.cwd(), "logs");
   const reportsDir = path.join(process.cwd(), "reports");
 
-  // Clean old logs (keep only last 7 days)
-  if (fs.existsSync(logsDir)) {
+  // Clean old logs and report directories (keep only last 7 days)
+
+  cleanDirectory(logsDir, 4);
+  cleanDirectory(reportsDir, 4);
+
+  //------------------------------------------------------------------------------//
+
+  console.log(
+    `[globalSetup] Before creation - reportsDir exists? ${fs.existsSync(reportsDir)}`,
+  );
+
+  //------------------------------------------------------------------------------//
+
+  /* if (fs.existsSync(logsDir)) {
     const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
 
     const items = fs.readdirSync(logsDir);
@@ -50,13 +39,27 @@ export default async function globalSetup() {
       }
     }
   }
-
+ */
   // Create fresh directories
   [logsDir, reportsDir].forEach((dir) => {
     if (!fs.existsSync(dir)) {
+      //---------------------------------------------------------------------//
+
+      console.log(`[globalSetup] Creating directory: ${dir}`);
+
+      //-----------------------------------------------------------------//
+
       fs.mkdirSync(dir, { recursive: true });
     }
+    //---------------------------------------------------------------------//
+    else {
+      console.log(`[globalSetup] Directory already exists: ${dir}`);
+    }
+    //---------------------------------------------------------------------//
   });
-
-  console.log("✅ Global Setup: Logging system initialized");
+  //-------------------------------------------------------------------------//
+  console.log(
+    `[globalSetup] After creation - reportsDir exists? ${fs.existsSync(reportsDir)}`,
+  );
+  //---------------------------------------------------------------------------//
 }
