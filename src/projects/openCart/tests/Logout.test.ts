@@ -1,3 +1,5 @@
+// src\projects\openCart\tests\Logout.test.ts
+
 import { test, expect } from "@core/authFixture";
 import { Routes } from "@core/types/routes";
 
