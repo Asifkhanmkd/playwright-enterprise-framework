@@ -32,6 +32,14 @@ jobs:
           PIPELINE: pr
           TEST_SCOPE: smoke
 
+      - name: Debug report folders
+        if: always()
+        run: |
+          pwd
+          ls -R
+          echo "==== REPORTS ===="
+          ls -R reports || true
+
       - name: Upload HTML report
         if: always()
         uses: actions/upload-artifact@v4
