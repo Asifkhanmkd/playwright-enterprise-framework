@@ -32,7 +32,7 @@ export abstract class BasePage {
     //logger.info(`Navigating to page: ${route}`)
     await this.page.goto(route, {
       waitUntil: "domcontentloaded",
-      timeout: 15000,
+      timeout: 30000,
     });
   }
 
