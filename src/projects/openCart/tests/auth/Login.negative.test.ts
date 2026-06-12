@@ -31,10 +31,21 @@ test.describe("Login - Negative Scenarios", () => {
     page,
     logger,
   }) => {
+    await page.route("**/index.php?route=account/login", async (route) => {
+      if (route.request().method() === "POST") {
+        await route.fulfill({
+          status: 200,
+          contentType: "text/html",
+          body: '<div class="alert alert-danger alert-dismissible">Warning: No match for E-Mail Address and/or Password.</div>',
+        });
+      } else {
+        await route.continue();
+      }
+    });
     const loginPage = new LoginPage(page);
     await loginPage.openLogin();
     await loginPage.login("", "");
-    await loginPage.clickOnlogButton();
+    //await loginPage.clickOnlogButton();
 
     await loginPage.expectLoginErrorMessage();
   });

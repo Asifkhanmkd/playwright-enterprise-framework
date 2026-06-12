@@ -1,10 +1,11 @@
 import type { Page } from "@playwright/test";
 import path from "path";
-import { test as baseTest } from "@core/testBase";
+//import { test as baseTest } from "@core/testBase";
+import { test as baseTest } from "@core/authWorkerFixture";
 import { CREDENTIALS } from "../../config/constants";
 import { ProductPage } from "@projects/openCart/pages/Product.page";
 import { isAuthStateFresh } from "./utils/authStateGuard";
-const STORAGE_STATE_PATH = path.resolve("Storage/auth-state.json");
+//const STORAGE_STATE_PATH = path.resolve("Storage/auth-state.json");
 
 type AuthFixtures = {
   authPage: Page;
@@ -12,10 +13,10 @@ type AuthFixtures = {
 };
 
 export const test = baseTest.extend<AuthFixtures>({
-  // 🔑 AUTH DECISION (before context creation)
-  storageState: isAuthStateFresh() ? STORAGE_STATE_PATH : undefined,
+  //  AUTH DECISION (before context creation)
 
-  // 🔐 AUTH VERIFICATION (not auth creation)
+  //storageState: STORAGE_STATE_PATH,
+
   authPage: async ({ page }, use) => {
     // We do NOT login here
     // We only verify assumptions if needed

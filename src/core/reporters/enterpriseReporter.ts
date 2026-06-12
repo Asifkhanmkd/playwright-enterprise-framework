@@ -33,16 +33,45 @@ export default class EnterpriseReporter implements Reporter {
     const reportsDir = path.resolve(process.cwd(), "reports", this.runId);
     this.workersDir = path.resolve(process.cwd(), "logs", "workers");
 
+        //------------------------just for debugging purposes-------------------
+
+    console.log(`[Reporter Constructor] About to create reportsDir: ${reportsDir}`);
+    console.log(`[Reporter Constructor] Before mkdir - reportsDir exists? ${fs.existsSync(reportsDir)}`);
+
+    console.log(`[Reporter Constructor] Before mkdir - parent dir 'reports' exists? ${fs.existsSync(path.resolve(process.cwd(), "reports"))}`);
+            //------------------------------------------------------------------
+
     // Create directories atomically
     [reportsDir, this.workersDir].forEach((dir) => {
       if (!fs.existsSync(dir)) {
+        //---------------------------------------------------------//
+       console.log(`[Reporter Constructor] Creating directory: ${dir}`);
+        //---------------------------------------------------------//
         fs.mkdirSync(dir, { recursive: true, mode: 0o755 });
       }
+      //----------------------------------//
+      else{
+         console.log(`[Reporter Constructor] Directory already exists: ${dir}`);
+      }
+      //----------------------------------//
+
     });
+
+    //-------------------------------------------------------//
+
+     console.log(`[Reporter Constructor] After mkdir - parent dir 'reports' exists? ${fs.existsSync(path.resolve(process.cwd(), "reports"))}`);
+   //-------------------------------------------------------------------------//
 
     this.runLogPath = path.join(reportsDir, "execution.log");
     this.aggregatedLogPath = path.join(reportsDir, "aggregated.log");
     this.summaryPath = path.join(reportsDir, "summary.json");
+
+    //----------------------------------------------------//
+
+   console.log(`[Reporter Constructor] runLogPath = ${this.runLogPath}`);
+  console.log(`[Reporter Constructor] runLogPath parent exists? ${fs.existsSync(path.dirname(this.runLogPath))}`);
+   //-------------------------------------------------------------//
+
   }
 
   onBegin(config: FullConfig, suite: Suite): void {
