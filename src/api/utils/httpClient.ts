@@ -29,10 +29,12 @@ export class HttpClient {
 
   async put(path: string, body: unknown) {
     const response = await this.context.put(path, { data: body });
+    return response;
   }
 
   async delete(path: string) {
     const response = await this.context.delete(path);
+    return response;
   }
 
   async dispose() {
