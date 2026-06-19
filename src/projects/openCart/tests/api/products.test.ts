@@ -5,7 +5,7 @@ import { Product } from "../../../../api/models/product";
 import { test, expect } from "@playwright/test";
 
 test.describe("Products API - CRUD", () => {
-  test("create, read, update and delete a product", async () => {
+  test(" @smoke @critical TC12: create, read, update and delete a product", async () => {
     const http = new HttpClient("https://dummyjson.com");
     await http.init();
 
