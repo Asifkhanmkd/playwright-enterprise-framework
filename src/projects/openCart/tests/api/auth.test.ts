@@ -5,9 +5,9 @@ import { AuthResponse } from "src/api/models/auth";
 import { AuthSchema } from "src/api/schemas/authSchema";
 
 test.describe("Auth API test", () => {
-  test("verify successful Login with valid credentials", async () => {
+  test("@smoke @critical @modifies-auth TC:11 verify successful Login with valid credentials", async () => {
     const http = new HttpClient("https://dummyjson.com");
-    
+    await http.init();
     const authClient = new AuthClient(http);
 
     const response = await authClient.login("emilys", "emilyspass");
