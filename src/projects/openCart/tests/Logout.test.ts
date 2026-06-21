@@ -1,7 +1,7 @@
 // src\projects\openCart\tests\Logout.test.ts
 
-import { test, expect } from "@core/authFixture";
-import { Routes } from "@core/types/routes";
+import { test, expect } from "@projects/openCart/fixtures/authFixture";
+import { Routes } from "@projects/openCart/types/routes";
 
 test("@smoke @critical @modifies-auth TC-06: user can logout successfully", async ({
   authPage,

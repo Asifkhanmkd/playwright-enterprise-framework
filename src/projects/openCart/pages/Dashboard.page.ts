@@ -1,5 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import { BasePage } from "../../../core/Base.page";
+import { BasePage } from "@core/Base.page";
 
 export class DashboardPage extends BasePage {
   protected locatorMap: Record<string, Locator | ((...args: any[]) => Locator)>;

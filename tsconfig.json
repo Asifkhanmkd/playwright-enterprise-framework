@@ -12,8 +12,7 @@
     "baseUrl": "./",
     "paths": {
       "@core/*": ["src/core/*"],
-      "@utils/*": ["src/core/utils/*"],
-      "@fixtures/*": ["src/core/fixtures/*"],
+      "@shared/*": ["src/shared/*"],
       "@projects/*": ["src/projects/*"],
       "@config/*": ["config/*"]
     }

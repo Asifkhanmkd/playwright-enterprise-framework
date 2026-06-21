@@ -1,4 +1,4 @@
-import { HttpClient } from "../utils/httpClient";
+import { HttpClient } from "@shared/api/httpClient";
 import {
   CreateProductRequest,
   Product,

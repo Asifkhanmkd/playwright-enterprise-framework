@@ -5,7 +5,7 @@ import { DashboardPage } from "@projects/openCart/pages/Dashboard.page";
 import { CREDENTIALS } from "@config/constants";
 //import { logger } from "@utils/logger";
 import fs from "fs";
-import { Routes } from "@core/types/routes";
+import { Routes } from "@projects/openCart/types/routes";
 
 const STORAGE_STATE_PATH = "Storage/auth-state.json";
 

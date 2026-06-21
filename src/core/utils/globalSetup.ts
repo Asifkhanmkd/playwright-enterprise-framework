@@ -1,7 +1,3 @@
-// src/core/globalSetup.ts
-import { CREDENTIALS } from "@config/constants";
-import { chromium } from "@playwright/test";
-import { LoginPage } from "@projects/openCart/pages/Login.page";
 import fs from "fs";
 import path from "path";
 import { getEnv } from "@config/test.env";

@@ -1,4 +1,4 @@
-import { HttpClient } from "../../../../api/utils/httpClient";
+import { HttpClient } from "@shared/api/httpClient";
 import { AuthClient } from "../../../../api/clients/authClient";
 import { test, expect } from "@playwright/test";
 import { AuthResponse } from "src/api/models/auth";

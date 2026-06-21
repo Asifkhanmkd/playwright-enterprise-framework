@@ -1,10 +1,10 @@
 import type { Page } from "@playwright/test";
 import path from "path";
 //import { test as baseTest } from "@core/testBase";
-import { test as baseTest } from "@core/authWorkerFixture";
-import { CREDENTIALS } from "../../config/constants";
+import { test as baseTest } from "./authWorkerFixture";
+import { CREDENTIALS } from "@config/constants";
 import { ProductPage } from "@projects/openCart/pages/Product.page";
-import { isAuthStateFresh } from "./utils/authStateGuard";
+import { isAuthStateFresh } from "@projects/openCart/utils/authStateGuard";
 //const STORAGE_STATE_PATH = path.resolve("Storage/auth-state.json");
 
 type AuthFixtures = {

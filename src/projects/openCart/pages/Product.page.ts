@@ -1,5 +1,5 @@
-import { Routes } from "@core/types/routes";
-import { BasePage } from "../../../core/Base.page";
+import { Routes } from "../types/routes";
+import { BasePage } from "@core/Base.page";
 import { Locator, expect, Page } from "@playwright/test";
 //import { logger } from "@utils/logger";
 

@@ -1,5 +1,5 @@
 import fs from "fs";
-import { Routes } from "@core/types/routes";
+import { Routes } from "../types/routes";
 import type { Browser, Page } from "@playwright/test";
 import path from "path";
 
