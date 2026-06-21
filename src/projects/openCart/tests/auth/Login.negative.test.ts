@@ -1,7 +1,7 @@
 //import { test, expect } from "@playwright/test";
-import { test, expect } from "@core/testBase";
+import { test, expect } from "@projects/openCart/fixtures/testBase";
 import { LoginPage } from "@projects/openCart/pages/Login.page";
-import { Routes } from "@core/types/routes";
+import { Routes } from "@projects/openCart/types/routes";
 import { CREDENTIALS } from "@config/constants";
 
 test.describe("Login - Negative Scenarios", () => {

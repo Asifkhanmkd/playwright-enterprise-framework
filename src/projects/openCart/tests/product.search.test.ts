@@ -1,4 +1,4 @@
-import { test, expect } from "@core/authFixture";
+import { test, expect } from "@projects/openCart/fixtures/authFixture";
 
 test.describe("Product Search", () => {
   test("@smoke TC-07: search with exact product name", async ({

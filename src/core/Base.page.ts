@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 //import { logger } from "@core/utils/logger";
-import { Routes } from "@core/types/routes";
+import { Routes } from "@projects/openCart/types/routes";
 type LocatorEntry = Locator | ((...args: any[]) => Locator);
 
 export abstract class BasePage {

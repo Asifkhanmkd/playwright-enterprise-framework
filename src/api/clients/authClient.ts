@@ -1,5 +1,5 @@
 import { APIResponse } from "@playwright/test";
-import { HttpClient } from "../utils/httpClient";
+import { HttpClient } from "@shared/api/httpClient";
 
 export class AuthClient {
   constructor(private readonly http: HttpClient) {}

@@ -1,4 +1,4 @@
-import { test as base } from "@core/testBase";
+import { test as base } from "./testBase";
 import { chromium } from "@playwright/test";
 import path from "path";
 import fs from "fs";

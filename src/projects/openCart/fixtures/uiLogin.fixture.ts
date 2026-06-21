@@ -1,6 +1,6 @@
 // src\core\uiLogin.fixture.ts
 
-import { test as baseTest } from "@core/testBase";
+import { test as baseTest } from "@projects/openCart/fixtures/testBase";
 import { LoginPage } from "@projects/openCart/pages/Login.page";
 import { Page } from "@playwright/test";
 import { CREDENTIALS } from "@config/constants";

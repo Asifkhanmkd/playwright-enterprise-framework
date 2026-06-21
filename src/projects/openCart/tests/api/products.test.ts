@@ -1,4 +1,4 @@
-import { HttpClient } from "../../../../api/utils/httpClient";
+import { HttpClient } from "@shared/api/httpClient";
 import { ProductClient } from "../../../../api/clients/productClient";
 import { ProdSchema } from "../../../../api/schemas/productSchema";
 import { Product } from "../../../../api/models/product";
