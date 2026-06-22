@@ -34,7 +34,7 @@ export class ProductClient {
   }
 
   async deleteProduct(id: number) {
-    const response = await this.http.delete(`products/${id}`);
+    const response = await this.http.delete(`/products/${id}`);
     return response;
   }
 }
