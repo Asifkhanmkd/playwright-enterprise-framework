@@ -1,8 +1,8 @@
 import { HttpClient } from "@shared/api/httpClient";
-import { AuthClient } from "../../../../api/clients/authClient";
+import { AuthClient } from "@projects/dummyjson/api/clients/authClient";
 import { test, expect } from "@playwright/test";
-import { AuthResponse } from "src/api/models/auth";
-import { AuthSchema } from "src/api/schemas/authSchema";
+import { AuthResponse } from "@projects/dummyjson/api/models/auth";
+import { AuthSchema } from "@projects/dummyjson/api/schemas/authSchema";
 
 test.describe("Auth API test", () => {
   test("@smoke @critical @modifies-auth TC:11 verify successful Login with valid credentials", async () => {
