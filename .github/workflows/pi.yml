@@ -28,8 +28,8 @@ jobs:
       - name: Run Smoke tests
         run: npx playwright test --config=config/playwright.config.ts
         env:
-          OPENCART_BASE_URL: ${{vars.OPENCART_BASE_URL}}
-          DUMMYJSON_BASE_URL: ${{vars.DUMMYJSON_BASE_URL }}
+          OPENCART_BASE_URL: https://naveenautomationlabs.com/
+          DUMMYJSON_BASE_URL: https://dummyjson.com
           PIPELINE: pr
           TEST_SCOPE: smoke
 
