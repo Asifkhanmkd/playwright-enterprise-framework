@@ -4,16 +4,17 @@ import { resolve } from "path";
 dotenv.config({ path: resolve(process.cwd(), ".env") });
 
 export function getEnv() {
-  const requiredVal = ["BASE_URL"];
+  const requiredValues = ["OPENCART_BASE_URL", "DUMMYJSON_BASE_URL"];
 
-  requiredVal.forEach((key) => {
+  requiredValues.forEach((key) => {
     if (!process.env[key]) {
       throw new Error(`Missing required variable: ${key}`);
     }
   });
 
   return {
-    BASE_URL: process.env.BASE_URL!,
-   // RETRIES: Number(process.env.RETRIES || 0),
+    OPENCART_BASE_URL: process.env.OPENCART_BASE_URL!,
+    DUMMYJSON_BASE_URL: process.env.DUMMYJSON_BASE_URL!,
+    // RETRIES: Number(process.env.RETRIES || 0),
   };
 }

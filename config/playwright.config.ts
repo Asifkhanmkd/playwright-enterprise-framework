@@ -43,8 +43,6 @@ console.log("Workers:", workers);
 console.log("Fully Parallel:", fullyParallel);
 
 export default defineConfig({
-  // Fix: Go up one level from config directory, then into src
-  testDir: path.resolve(__dirname, "..", "src/projects/openCart/tests"),
   timeout: 30000,
   retries,
   grep,
@@ -75,15 +73,32 @@ export default defineConfig({
     [path.resolve(__dirname, "..", "src/core/reporters/enterpriseReporter.ts")],
   ],
 
-  // Enhanced use settings
-  use: {
-    baseURL: env.BASE_URL,
-    headless: isCI,
-    screenshot: "only-on-failure",
-    video: "retain-on-failure",
-    trace: "retain-on-failure",
-    viewport: { width: 1280, height: 800 },
-    navigationTimeout: 15000,
-    actionTimeout: 10000,
-  },
+  projects: [
+    {
+      name: "openCart",
+      testDir: path.resolve(__dirname, "..", "src/projects/openCart/tests"),
+      use: {
+        baseURL: env.OPENCART_BASE_URL,
+        headless: isCI,
+        screenshot: "only-on-failure",
+        video: "retain-on-failure",
+        trace: "retain-on-failure",
+        viewport: { width: 1280, height: 800 },
+        navigationTimeout: 15000,
+        actionTimeout: 10000,
+      },
+    },
+    {
+      name: "dummyjson-api",
+      testDir: path.resolve(
+        __dirname,
+        "..",
+        "src/projects/dummyjson/tests/api",
+      ),
+      workers: 1,
+      use: {
+        baseURL: env.DUMMYJSON_BASE_URL,
+      },
+    },
+  ],
 });
