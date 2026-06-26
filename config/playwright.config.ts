@@ -100,5 +100,21 @@ export default defineConfig({
         baseURL: env.DUMMYJSON_BASE_URL,
       },
     },
+
+    {
+      name: "toolshop",
+      testDir: path.resolve(__dirname, "..", "src/projects/toolshop/tests"),
+
+      use: {
+        baseURL: env.TOOLSHOP_BASE_URL,
+        headless: isCI,
+        screenshot: "only-on-failure",
+        video: "retain-on-failure",
+        trace: "retain-on-failure",
+        viewport: { width: 1280, height: 800 },
+        navigationTimeout: 15000,
+        actionTimeout: 10000,
+      },
+    },
   ],
 });
