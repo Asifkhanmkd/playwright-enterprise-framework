@@ -43,7 +43,7 @@ console.log("Workers:", workers);
 console.log("Fully Parallel:", fullyParallel);
 
 export default defineConfig({
-  timeout: 30000,
+  timeout: 60000,
   retries,
   grep,
   fullyParallel,

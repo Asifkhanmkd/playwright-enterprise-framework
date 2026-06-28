@@ -1,6 +1,9 @@
+//src\core\Base.page.ts
+
 import { Page, Locator, expect } from "@playwright/test";
 //import { logger } from "@core/utils/logger";
 import { Routes } from "@projects/openCart/types/routes";
+import { retryNavigation } from "@core/utils/retryNavigation";
 type LocatorEntry = Locator | ((...args: any[]) => Locator);
 
 export abstract class BasePage {
@@ -18,22 +21,16 @@ export abstract class BasePage {
     return this.page;
   }
 
-  // Navigating To AUT (Application Under Test)
-
-  /* async navigateTo(path: string): Promise<void> {
-    await this.page.goto(path, {
-      waitUntil: "domcontentloaded",
-      timeout: 10_000,
-    });
-    logger.info(`Current URL: ${this.page.url()}`);
-  } */
-
-  protected async goTo(route: Routes) {
+  /* protected async goTo(route: Routes) {
     //logger.info(`Navigating to page: ${route}`)
     await this.page.goto(route, {
       waitUntil: "domcontentloaded",
       timeout: 100000,
     });
+  } */
+
+  protected async goTo(route: Routes) {
+    await retryNavigation(this.page, route);
   }
 
   // Centralizer locator Resolver
@@ -53,12 +50,6 @@ export abstract class BasePage {
     }
     return entry;
   }
-
-  /* async assertVisibility(key: string, ...args: any[]): Promise<void> {
-    logger.info(`Asserting visibility of ${key}`);
-    const locator = this.resolveLocator(key, ...args);
-    await expect(locator).toBeVisible({ timeout: 5000 });
-  } */
 
   //----------------------------------- Saftey Layer ---------------------------------------------//
 

@@ -31,20 +31,42 @@ export const test = base.extend<{}, workerFixtures>({
         const page = await context.newPage();
 
         const loginPage = new LoginPage(page);
+
+        console.log(
+          `[Worker ${workerInfo.workerIndex}] Opening OpenCart login page...✅✅✅✅✅✅✅✅✅✅`,
+        );
+
         await loginPage.openLogin();
+
+        console.log(
+          `[Worker ${workerInfo.workerIndex}] Signing in with test account...✅✅✅✅✅✅✅✅✅✅`,
+        );
         await loginPage.login(
           CREDENTIALS.OPENCART_EMAIL,
           CREDENTIALS.OPENCART_PASSWORD,
         );
-
+        console.log(
+          `[Worker ${workerInfo.workerIndex}] Saving browser session...✅✅✅✅✅✅✅✅✅✅`,
+        );
         await context.storageState({ path: workerStorageStatePath });
 
         await browser.close();
+        console.log(
+          `[Worker ${workerInfo.workerIndex}] Authentication state created.✅✅✅✅✅✅✅✅✅✅`,
+        );
+      } else {
+        console.log(
+          `[Worker ${workerInfo.workerIndex}] Reusing existing auth state.✅✅✅✅✅✅✅✅✅✅`,
+        );
       }
+
+      console.log(
+        `[Worker ${workerInfo.workerIndex}] Using auth state: ${workerStorageStatePath}✅✅✅✅✅✅✅✅✅✅`,
+      );
 
       await use(workerStorageStatePath);
     },
-    { scope: "worker" },
+    { scope: "worker", timeout: 90000 },
   ],
 
   page: async ({ browser, workerStorageState }, use, testInfo) => {
