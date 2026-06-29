@@ -43,7 +43,7 @@ console.log("Workers:", workers);
 console.log("Fully Parallel:", fullyParallel);
 
 export default defineConfig({
-  timeout: 30000,
+  timeout: 60000,
   retries,
   grep,
   fullyParallel,
@@ -98,6 +98,22 @@ export default defineConfig({
       workers: 1,
       use: {
         baseURL: env.DUMMYJSON_BASE_URL,
+      },
+    },
+
+    {
+      name: "toolshop",
+      testDir: path.resolve(__dirname, "..", "src/projects/toolshop/tests"),
+
+      use: {
+        baseURL: env.TOOLSHOP_BASE_URL,
+        headless: isCI,
+        screenshot: "only-on-failure",
+        video: "retain-on-failure",
+        trace: "retain-on-failure",
+        viewport: { width: 1280, height: 800 },
+        navigationTimeout: 15000,
+        actionTimeout: 10000,
       },
     },
   ],

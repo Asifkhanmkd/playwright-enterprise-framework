@@ -45,8 +45,6 @@ test.describe("Login - Negative Scenarios", () => {
     const loginPage = new LoginPage(page);
     await loginPage.openLogin();
     await loginPage.login("", "");
-    //await loginPage.clickOnlogButton();
-
     await loginPage.expectLoginErrorMessage();
   });
 });

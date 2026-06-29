@@ -3,8 +3,7 @@ import { chromium } from "@playwright/test";
 import path from "path";
 import fs from "fs";
 import { getEnv } from "@config/test.env";
-import { LoginPage } from "@projects/openCart/pages/Login.page";
-import { CREDENTIALS } from "@config/constants";
+import { AuthService } from "@projects/openCart/services/AuthService";
 
 const env = getEnv();
 const STORAGE_DIR = path.resolve("Storage");
@@ -30,21 +29,30 @@ export const test = base.extend<{}, workerFixtures>({
         const context = await browser.newContext();
         const page = await context.newPage();
 
-        const loginPage = new LoginPage(page);
-        await loginPage.openLogin();
-        await loginPage.login(
-          CREDENTIALS.OPENCART_EMAIL,
-          CREDENTIALS.OPENCART_PASSWORD,
-        );
+        await AuthService.login(page);
 
+        console.log(
+          `[Worker ${workerInfo.workerIndex}] Saving browser session...`,
+        );
         await context.storageState({ path: workerStorageStatePath });
 
         await browser.close();
+        console.log(
+          `[Worker ${workerInfo.workerIndex}] Authentication state created.`,
+        );
+      } else {
+        console.log(
+          `[Worker ${workerInfo.workerIndex}] Reusing existing auth state.`,
+        );
       }
+
+      console.log(
+        `[Worker ${workerInfo.workerIndex}] Using auth state: ${workerStorageStatePath}`,
+      );
 
       await use(workerStorageStatePath);
     },
-    { scope: "worker" },
+    { scope: "worker", timeout: 90000 },
   ],
 
   page: async ({ browser, workerStorageState }, use, testInfo) => {
@@ -73,12 +81,7 @@ export const test = base.extend<{}, workerFixtures>({
       const context = await browser.newContext();
       const page = await context.newPage();
 
-      const loginPage = new LoginPage(page);
-      await loginPage.openLogin();
-      await loginPage.login(
-        CREDENTIALS.OPENCART_EMAIL,
-        CREDENTIALS.OPENCART_PASSWORD,
-      );
+      await AuthService.login(page);
       await use(page);
       await context.close();
       return;

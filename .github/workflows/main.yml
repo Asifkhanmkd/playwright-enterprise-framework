@@ -30,6 +30,7 @@ jobs:
         env:
           OPENCART_BASE_URL: https://naveenautomationlabs.com/
           DUMMYJSON_BASE_URL: https://dummyjson.com
+          TOOLSHOP_BASE_URL: https://practicesoftwaretesting.com
           PIPELINE: main
           TEST_SCOPE: critical
 
