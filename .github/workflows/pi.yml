@@ -25,10 +25,6 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Check OpenCart availability
-        run: |
-          curl -L --max-time 30 https://naveenautomationlabs.com/opencart/index.php?route=account/login
-
       - name: Run Smoke tests
         run: npx playwright test --config=config/playwright.config.ts
         env:
