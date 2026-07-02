@@ -1,4 +1,8 @@
-import { APIRequestContext, request } from "@playwright/test";
+import { APIRequestContext, request, APIResponse } from "@playwright/test";
+
+export interface HttpClientOptions {
+  header?: Record<string, string>;
+}
 
 export class HttpClient {
   private readonly baseURL: string;
@@ -17,27 +21,39 @@ export class HttpClient {
     });
   }
 
-  async get(path: string) {
-    const response = await this.context.get(path);
+  async get(path: string, options?: HttpClientOptions): Promise<APIResponse> {
+    const response = await this.context.get(path, { headers: options?.header });
     return response;
   }
 
-  async post(path: string, body: unknown) {
-    const response = await this.context.post(path, { data: body });
+  async post(
+    path: string,
+    body: unknown,
+    options?: HttpClientOptions,
+  ): Promise<APIResponse> {
+    const response = await this.context.post(path, {
+      data: body,
+      headers: options?.header,
+    });
     return response;
   }
 
-  async put(path: string, body: unknown) {
-    const response = await this.context.put(path, { data: body });
+  async put(path: string, body: unknown, options?: HttpClientOptions) {
+    const response = await this.context.put(path, {
+      data: body,
+      headers: options?.header,
+    });
     return response;
   }
 
-  async delete(path: string) {
-    const response = await this.context.delete(path);
+  async delete(path: string, options?: HttpClientOptions) {
+    const response = await this.context.delete(path, {
+      headers: options?.header,
+    });
     return response;
   }
 
-  async dispose() {
+  async dispose(): Promise<void> {
     await this.context.dispose();
   }
 }
