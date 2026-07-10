@@ -11,6 +11,6 @@ export class AuthClient {
   }
 
   async register(payload: RegisterRequest): Promise<APIResponse> {
-    return await this.http.post("users/register", payload);
+    return await this.http.post("/users/register", payload);
   }
 }
