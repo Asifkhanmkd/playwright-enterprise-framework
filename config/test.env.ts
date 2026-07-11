@@ -20,7 +20,7 @@ export function getEnv() {
   return {
     OPENCART_BASE_URL: process.env.OPENCART_BASE_URL!,
     DUMMYJSON_BASE_URL: process.env.DUMMYJSON_BASE_URL!,
-    TOOLSHOP_UI_BASE_URL: process.env.TOOLSHOP_BASE_URL!,
+    TOOLSHOP_UI_BASE_URL: process.env.TOOLSHOP_UI_BASE_URL!,
     TOOLSHOP_API_BASE_URL: process.env.TOOLSHOP_API_BASE_URL!,
     // RETRIES: Number(process.env.RETRIES || 0),
   };
