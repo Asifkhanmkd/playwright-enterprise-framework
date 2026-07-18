@@ -96,9 +96,6 @@ export default defineConfig({
         "src/projects/dummyjson/tests/api",
       ),
       workers: 1,
-      use: {
-        baseURL: env.DUMMYJSON_BASE_URL,
-      },
     },
 
     {
@@ -106,7 +103,7 @@ export default defineConfig({
       testDir: path.resolve(__dirname, "..", "src/projects/toolshop/tests"),
 
       use: {
-        baseURL: env.TOOLSHOP_BASE_URL,
+        baseURL: env.TOOLSHOP_UI_BASE_URL,
         headless: isCI,
         screenshot: "only-on-failure",
         video: "retain-on-failure",

@@ -13,9 +13,9 @@ export const UserSchema = z.object({
   dob: z.string(),
   email: z.email(),
 
-  provider: z.string(),
-  totp_enabled: z.boolean(),
-  enabled: z.boolean(),
-  failed_login_attempts: z.number(),
+  provider: z.string().nullable(), //made nullable because the actaul response return it as null but swagger retun false
+  totp_enabled: z.boolean().nullable(), //made nullable because the actaul response return it as null but swagger retun false
+  enabled: z.boolean().optional(), //contradiction between swagger and actual response, response doesn't return it
+  failed_login_attempts: z.number().optional(), //same reason as above
   created_at: z.string(),
 });

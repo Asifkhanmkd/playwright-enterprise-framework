@@ -1,7 +1,7 @@
 import { APIRequestContext, request, APIResponse } from "@playwright/test";
 
 export interface HttpClientOptions {
-  header?: Record<string, string>;
+  headers?: Record<string, string>;
 }
 
 export class HttpClient {
@@ -22,7 +22,7 @@ export class HttpClient {
   }
 
   async get(path: string, options?: HttpClientOptions): Promise<APIResponse> {
-    const response = await this.context.get(path, { headers: options?.header });
+    const response = await this.context.get(path, { headers: options?.headers });
     return response;
   }
 
@@ -33,7 +33,7 @@ export class HttpClient {
   ): Promise<APIResponse> {
     const response = await this.context.post(path, {
       data: body,
-      headers: options?.header,
+      headers: options?.headers,
     });
     return response;
   }
@@ -41,14 +41,14 @@ export class HttpClient {
   async put(path: string, body: unknown, options?: HttpClientOptions) {
     const response = await this.context.put(path, {
       data: body,
-      headers: options?.header,
+      headers: options?.headers,
     });
     return response;
   }
 
   async delete(path: string, options?: HttpClientOptions) {
     const response = await this.context.delete(path, {
-      headers: options?.header,
+      headers: options?.headers,
     });
     return response;
   }

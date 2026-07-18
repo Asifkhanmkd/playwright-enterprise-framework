@@ -3,10 +3,13 @@ import { ProductClient } from "@projects/dummyjson/api/clients/productClient";
 import { ProdSchema } from "@projects/dummyjson/api/schemas/productSchema";
 import { Product } from "@projects/dummyjson/api/models/product";
 import { test, expect } from "@playwright/test";
+import { getEnv } from "@config/test.env";
 
 test.describe("Products API - CRUD", () => {
   test(" @smoke @critical TC12: create, read, update and delete a product", async () => {
-    const http = new HttpClient("https://dummyjson.com");
+    const env = getEnv();
+    const baseURL = env.DUMMYJSON_BASE_URL;
+    const http = new HttpClient(baseURL);
     await http.init();
 
     const productClient = new ProductClient(http);

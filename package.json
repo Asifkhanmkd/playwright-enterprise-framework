@@ -9,7 +9,8 @@
     "test:smoke": "playwright test --config=config/playwright.config.ts --grep @smoke",
     "test:regression": "playwright test --config=config/playwright.config.ts --grep @regression",
     "test:critical": "playwright test --config=config/playwright.config.ts --grep @critical",
-    "show-report": "playwright show-report config/reports/html --port=0"
+    "show-report": "playwright show-report config/reports/html --port=0",
+    "test:toolshop": "playwright test --config=config/playwright.config.ts --project=toolshop"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
