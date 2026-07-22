@@ -318,9 +318,9 @@ The following screenshots provide visual evidence of framework execution, report
 
 ### Playwright HTML Report
 
-![Playwright Report](docs\images\playwright-report-preview.png)
+![Playwright Report](docs/images/playwright-report-preview.png)
 
-![Playwright Report](docs\images\playwright-report-detailed.png)
+![Playwright Report](docs/images/playwright-report-detailed.png)
 
 ---
 
