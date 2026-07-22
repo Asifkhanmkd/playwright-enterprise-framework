@@ -1,11 +1,8 @@
-****\*****Readme.md****\*\*\*\*****
-
 # Enterprise Playwright Automation Framework (UI + API Testing)
 
 ![Playwright](https://img.shields.io/badge/Playwright-Testing-green)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![GitHub Actions](https://img.shields.io/badge/GitHub-Actions-orange)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 A scalable and maintainable test automation framework built with Playwright and TypeScript for modern web applications.
 
@@ -71,7 +68,7 @@ E --> J[Screenshots]
 E --> K[GitHub Actions CI/CD]
 ```
 
-If Mermaid rendering is not supported, use the simplified representation below:
+Simplified representation given below:
 
 ```text
 Tests
@@ -236,33 +233,32 @@ These artifacts help identify root causes more efficiently during local and CI/C
 ## Project Structure
 
 ```text
-├── config/
-│   ├── constants.ts
-│   ├── playwright.config.ts
-│
-├── src/
-│   ├── core/
-│   │   ├── hooks.ts
-│   │   ├── testBase.ts
-│   │   ├── authFixture.ts
-│   │   ├── uiLogin.fixture.ts
-│   │   ├── reporters/
-│   │   ├── types/
-│   │   └── utils/
-│   │
-│   ├── projects/
-│   │   └── openCart/
-│   │       ├── pages/
-│   │       └── tests/
-│
-├── Storage/
-│   └── auth-state.json
-│
+.github/
+└── workflows/
+
+.vscode/
+
+config/
+
+docs/
+
+src/
+├── core/
+├── shared/
+│   └── api/
+└── projects/
+    ├── dummyjson/
+    ├── openCart/
+    └── toolshop/
+
+Storage/
+└── auth-state.json
+
+Root
 ├── .env
 ├── .env.example
 ├── package.json
-├── tsconfig.json
-└── README.md
+└── package-lock.json
 ```
 
 ---
@@ -299,13 +295,13 @@ npx playwright install
 ### Execute All Tests
 
 ```bash
-npx playwright test
+npm test
 ```
 
 ### Open the HTML Report
 
 ```bash
-npx playwright show-report
+npm show-report
 ```
 
 ---
@@ -318,15 +314,13 @@ The following screenshots provide visual evidence of framework execution, report
 
 ![Framework Structure](docs/images/framework-structure.png)
 
-> Placeholder: Add screenshot showing complete framework folder structure.
-
 ---
 
 ### Playwright HTML Report
 
-![Playwright Report](docs/images/playwright-report.png)
+![Playwright Report](docs\images\playwright-report-preview.png)
 
-> Placeholder: Add screenshot showing Playwright HTML execution report.
+![Playwright Report](docs\images\playwright-report-detailed.png)
 
 ---
 
@@ -334,15 +328,13 @@ The following screenshots provide visual evidence of framework execution, report
 
 ![GitHub Actions](docs/images/github-actions.png)
 
-> Placeholder: Add screenshot showing successful GitHub Actions workflow execution.
-
 ---
 
-### Trace Viewer
+### Trace
+
+Playwright Trace Viewer provides step-by-step execution playback, allowing failed test scenarios to be investigated in detail.
 
 ![Trace Viewer](docs/images/trace-viewer.png)
-
-> Placeholder: Add screenshot showing Playwright Trace Viewer debugging session.
 
 ---
 
@@ -358,8 +350,7 @@ Current CI/CD capabilities include:
 - Critical test validation
 - Report generation
 - Artifact publishing
-- Trace collection for debugging
-- Pipeline-ready architecture
+- Playwright Trace Viewer support
 
 ### Typical Workflow
 
@@ -411,4 +402,4 @@ Software QA Engineer specializing in:
 
 ---
 
-_This repository demonstrates modern Playwright automation engineering practices with a focus on scalability, maintainability, reliability, and enterprise-ready CI/CD integration. _
+This repository demonstrates modern Playwright automation engineering practices with a focus on scalability, maintainability, reliability, and enterprise-ready CI/CD integration.
