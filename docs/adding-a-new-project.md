@@ -12,7 +12,7 @@ Before adding a new project, make sure you've:
 
 - Set up your local environment using the [Environment Configuration Guide](Environment-Configuration.md)
 - Got a basic understanding of the framework's architecture
-- Read through the [Enterprise Framework v2.0 Design](Enterprise-Framework-v2.0.md), especially the Project Contract section
+- Read through the [Enterprise Framework v2 Design](Enterprise-Framework-v2.md), especially the Project Contract section
 
 ### 3. Choose the Project Type
 
@@ -32,7 +32,7 @@ Create your new project folder under:
 
 Stick to the same folder structure and naming conventions the existing projects already use.
 
-The required structure is laid out in the Project Contract section of the [Enterprise Framework v2.0 Design](Enterprise-Framework-v2.0.md). Try not to invent your own folder layout unless the framework architecture has been deliberately changed to allow it.
+The required structure is laid out in the Project Contract section of the [Enterprise Framework v2.0 Design](Enterprise-Framework-v2.md). Try not to invent your own folder layout unless the framework architecture has been deliberately changed to allow it.
 
 ### 5. Configure Environment Variables
 
@@ -97,5 +97,5 @@ Before submitting a new project, confirm that:
 ### 11. Related Documentation
 
 - [README](../README.md)
-- [Enterprise Framework v2.0 Design](enterprise-framework-v2.0.md)
+- [Enterprise Framework v2.0 Design](enterprise-framework-v2.md)
 - [Environment Configuration Guide](environment-configuration.md)
