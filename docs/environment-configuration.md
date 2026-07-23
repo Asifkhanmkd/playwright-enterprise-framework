@@ -81,8 +81,8 @@ If the framework can't find an environment variable it's expecting:
 ## 9. Related Documentation
 
 - [README](../README.md)
-- [Enterprise Framework v2.0 Design](Enterprise-Framework-v2.0.md)
-- Adding a New Project Guide _(coming soon)_
+- [Enterprise Framework v2.0 Design](enterprise-framework-v2.0.md)
+- [Adding a New Project Guide](adding-a-new-project.md)
 
 ---
 
