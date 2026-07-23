@@ -402,4 +402,4 @@ Software QA Engineer specializing in:
 
 ---
 
-This repository demonstrates modern Playwright automation engineering practices with a focus on scalability, maintainability, reliability, and enterprise-ready CI/CD integration.
+_This repository demonstrates modern Playwright automation engineering practices with a focus on scalability, maintainability, reliability, and enterprise-ready CI/CD integration._
