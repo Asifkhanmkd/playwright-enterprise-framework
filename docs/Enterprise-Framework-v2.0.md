@@ -84,7 +84,7 @@
              Every automation project should be able to change and grow on its own, without needing changes in other projects or in the shared framework.
 
     5f. Framework Neutrality
-            Shared framework code should never know anything about a specific application. That means no OpenCart routes, no Toolshop models, no DummyJSON endpoints baked into the shared layer.
+            Shared framework code should never know anything about a specific pplication. That means no OpenCart routes, no Toolshop models, no DummyJSON endpoints baked into the shared layer.
 
 6- Framework Architecture
 
@@ -453,7 +453,7 @@ Epic 8: Portfolio Readiness:
 
 Success Criteria:
 
-            The transformation gets marked as complete once:
+            The transformation gets marked as completed one
             The implementation fully backs up everything the repository documentation claims
             The architecture actually follows the principles laid out in this document
             The framework shows consistent engineering practices across every project
