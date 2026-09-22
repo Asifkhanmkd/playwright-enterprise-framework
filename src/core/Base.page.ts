@@ -2,7 +2,7 @@
 
 import { Page, Locator, expect } from "@playwright/test";
 //import { logger } from "@core/utils/logger";
-import { Routes } from "@projects/openCart/types/routes";
+
 import { retryNavigation } from "@core/utils/retryNavigation";
 type LocatorEntry = Locator | ((...args: any[]) => Locator);
 
@@ -21,16 +21,8 @@ export abstract class BasePage {
     return this.page;
   }
 
-  /* protected async goTo(route: Routes) {
-    //logger.info(`Navigating to page: ${route}`)
-    await this.page.goto(route, {
-      waitUntil: "domcontentloaded",
-      timeout: 100000,
-    });
-  } */
-
-  protected async goTo(route: Routes) {
-    await retryNavigation(this.page, route);
+  protected async goTo(url: string) {
+    await retryNavigation(this.page, url);
   }
 
   // Centralizer locator Resolver

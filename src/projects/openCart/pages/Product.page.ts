@@ -28,7 +28,7 @@ export class ProductPage extends BasePage {
   }
 
   async open(): Promise<void> {
-    await this.page.goto(Routes.HOME);
+    await this.goTo(Routes.HOME);
   }
 
   async searchProduct(searchText: string): Promise<void> {
