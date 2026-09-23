@@ -1,7 +1,7 @@
 import { HttpClient } from "@shared/api/httpClient";
-import { ProductClient } from "@projects/dummyjson/api/clients/productClient";
-import { ProdSchema } from "@projects/dummyjson/api/schemas/productSchema";
-import { Product } from "@projects/dummyjson/api/models/product";
+import { ProductClient } from "@projects/dummyjson/clients/productClient";
+import { ProdSchema } from "@projects/dummyjson/schemas/productSchema";
+import { Product } from "@projects/dummyjson/models/product";
 import { test, expect } from "@playwright/test";
 import { getEnv } from "@config/test.env";
 
