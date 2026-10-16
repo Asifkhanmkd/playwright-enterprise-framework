@@ -32,6 +32,8 @@ jobs:
           DUMMYJSON_BASE_URL: https://dummyjson.com
           TOOLSHOP_UI_BASE_URL: https://practicesoftwaretesting.com
           TOOLSHOP_API_BASE_URL: https://api.practicesoftwaretesting.com
+          TOOLSHOP_ADMIN_EMAIL: {{secrets.TOOLSHOP_ADMIN_EMAIL}}
+          TOOLSHOP_ADMIN_PASSWORD: {{secrets.TOOLSHOP_ADMIN_PASSWORD}}
           PIPELINE: pr
           TEST_SCOPE: smoke
 
