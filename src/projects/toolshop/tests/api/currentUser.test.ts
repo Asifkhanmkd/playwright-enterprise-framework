@@ -1,32 +1,29 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "@projects/toolshop/fixtures/ToolshopApi.fixture";
 import { HttpClient } from "@shared/api/httpClient";
-import { AuthClient } from "@projects/toolshop/api/clients/authClient";
-import { UsersClient } from "@projects/toolshop/api/clients/usetClient";
-import { buildRegisterUser } from "../testData/registerUser";
-import { LoginResponse } from "@projects/toolshop/api/models/loginResponse";
-import { User } from "@projects/toolshop/api/models/user";
-import { LoginResponseSchema } from "@projects/toolshop/api/schemas/loginResponse.schema";
-import { UserSchema } from "@projects/toolshop/api/schemas/user.schema";
+import { AuthClient } from "@projects/toolshop/clients/authClient";
+import { UsersClient } from "@projects/toolshop/clients/usetClient";
+import { buildRegisterUser } from "../../testData/registerUser";
+import { LoginResponse } from "@projects/toolshop/models/loginResponse";
+import { User } from "@projects/toolshop/models/user";
+import { LoginResponseSchema } from "@projects/toolshop/schemas/loginResponse.schema";
+import { UserSchema } from "@projects/toolshop/schemas/user.schema";
 import { getEnv } from "@config/test.env";
 
 test.describe("Toolshop current user API", () => {
-  test("@smoke @critical TC-03: get current authenticated user", async () => {
-    const env = getEnv();
-    const http = new HttpClient(env.TOOLSHOP_API_BASE_URL);
-    await http.init();
-    const authClient = new AuthClient(http);
-    const userClient = new UsersClient(http);
+  test("@smoke @critical TC-03: get current authenticated user", async ({
+    toolshopApi,
+  }) => {
     const newUser = buildRegisterUser();
-    const registerResponse = await authClient.register(newUser);
+    const registerResponse = await toolshopApi.auth.register(newUser);
     expect(registerResponse.status()).toBe(201);
-    const loginResponse = await authClient.login({
+    const loginResponse = await toolshopApi.auth.login({
       email: newUser.email,
       password: newUser.password,
     });
 
     expect(loginResponse.status()).toBe(200);
     const loginBody = (await loginResponse.json()) as LoginResponse;
-    const currentUserResponse = await userClient.getCurrentUser(
+    const currentUserResponse = await toolshopApi.users.getCurrentUser(
       loginBody.access_token,
     );
     expect(currentUserResponse.status()).toBe(200);

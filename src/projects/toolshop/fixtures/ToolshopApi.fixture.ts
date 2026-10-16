@@ -1,7 +1,7 @@
 import { HttpClient } from "@shared/api/httpClient";
-import { AuthClient } from "../api/clients/authClient";
+import { AuthClient } from "../clients/authClient";
 import { test as base, expect } from "@playwright/test";
-import { UsersClient } from "../api/clients/usetClient";
+import { UsersClient } from "../clients/usetClient";
 import { getEnv } from "@config/test.env";
 
 const env = getEnv();
