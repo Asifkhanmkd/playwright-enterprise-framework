@@ -1,4 +1,4 @@
-import { RegisterRequest } from "@projects/toolshop/api/models/registerRequest";
+import { RegisterRequest } from "@projects/toolshop/models/registerRequest";
 
 function uniqueSuffix(): string {
   return `${Date.now()}-${Math.floor(Math.random() * 10000)}`;

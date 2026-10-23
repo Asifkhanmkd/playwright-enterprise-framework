@@ -1,8 +1,8 @@
 //import { test, expect } from "@playwright/test";
-import { test, expect } from "@projects/toolshop/fixtures/ToolshopApi.fixuture";
-import { buildRegisterUser } from "../testData/registerUser";
-import { RegisterResponse } from "@projects/toolshop/api/models/registerResponse";
-import { RegisterResponseSchema } from "@projects/toolshop/api/schemas/registerResponse.schema";
+import { test, expect } from "@projects/toolshop/fixtures/ToolshopApi.fixture";
+import { buildRegisterUser } from "../../testData/registerUser";
+import { RegisterResponse } from "@projects/toolshop/models/registerResponse";
+import { RegisterResponseSchema } from "@projects/toolshop/schemas/registerResponse.schema";
 
 test.describe("Toolshop Registeration API", () => {
   test(" @regression TC-01: registration is rejected when password has appeared in a data leak", async ({

@@ -57,7 +57,6 @@ export abstract class BasePage {
       await locator.click();
     }
   }
-
   protected async safeFill(
     key: string,
     value: string,
@@ -68,6 +67,23 @@ export abstract class BasePage {
     await locator.waitFor({ state: "visible", timeout: 10_000 });
     await locator.fill("");
     await locator.fill(value);
+  }
+
+  protected async safeSelectOption(
+    key: string,
+    option: string,
+    ...args: any[]
+  ): Promise<void> {
+    const locator = this.resolveLocator(key, ...args);
+    await locator.waitFor({ state: "visible", timeout: 10_000 });
+    locator.scrollIntoViewIfNeeded();
+
+    try {
+      await locator.selectOption(option, { timeout: 5_000 });
+    } catch {
+      await locator.waitFor({ state: "attached" });
+      await locator.selectOption(option);
+    }
   }
 
   protected async waitForNetworkIdle(): Promise<void> {

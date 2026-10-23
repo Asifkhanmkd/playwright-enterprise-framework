@@ -1,7 +1,7 @@
-import { LoginResponse } from "@projects/toolshop/api/models/loginResponse";
-import { loginUser } from "../testData/loginUser";
-import { LoginResponseSchema } from "@projects/toolshop/api/schemas/loginResponse.schema";
-import { test, expect } from "@projects/toolshop/fixtures/ToolshopApi.fixuture";
+import { LoginResponse } from "@projects/toolshop/models/loginResponse";
+import { loginUser } from "../../testData/loginUser";
+import { LoginResponseSchema } from "@projects/toolshop/schemas/loginResponse.schema";
+import { test, expect } from "@projects/toolshop/fixtures/ToolshopApi.fixture";
 
 test.describe("Toolshop Login API test", () => {
   test("@smoke @critical @modified-auth TC: user can login with valid credential", async ({

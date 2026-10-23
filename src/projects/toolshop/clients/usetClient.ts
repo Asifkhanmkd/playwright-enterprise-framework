@@ -21,4 +21,12 @@ export class UsersClient {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
   }
+
+  async deleteUser(id: string, accessToken: string): Promise<APIResponse> {
+    return this.http.delete(`users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  }
 }
