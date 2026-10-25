@@ -9,6 +9,8 @@ export function getEnv() {
     "DUMMYJSON_BASE_URL",
     "TOOLSHOP_UI_BASE_URL",
     "TOOLSHOP_API_BASE_URL",
+    "TOOLSHOP_ADMIN_EMAIL",
+    "TOOLSHOP_ADMIN_PASSWORD",
   ];
 
   requiredValues.forEach((key) => {
@@ -22,6 +24,8 @@ export function getEnv() {
     DUMMYJSON_BASE_URL: process.env.DUMMYJSON_BASE_URL!,
     TOOLSHOP_UI_BASE_URL: process.env.TOOLSHOP_UI_BASE_URL!,
     TOOLSHOP_API_BASE_URL: process.env.TOOLSHOP_API_BASE_URL!,
+    TOOLSHOP_ADMIN_EMAIL: process.env.TOOLSHOP_ADMIN_EMAIL!,
+    TOOLSHOP_ADMIN_PASSWORD: process.env.TOOLSHOP_ADMIN_PASSWORD!,
     // RETRIES: Number(process.env.RETRIES || 0),
   };
 }

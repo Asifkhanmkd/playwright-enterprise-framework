@@ -9,15 +9,23 @@ jobs:
   smoke-tests:
     name: Run Smoke Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
-      - name: Checkout repository
+      - name: Checkout framework
         uses: actions/checkout@v4
+
+      - name: Checkout Toolshop application
+        uses: actions/checkout@v4
+        with:
+          repository: testsmith-io/practice-software-testing
+          path: toolshop-app
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -25,15 +33,78 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Smoke tests
+      # -------------------------------------------------------------------
+      # DIAGNOSTIC STEP: Inspect images BEFORE they start up
+      # -------------------------------------------------------------------
+      - name: Inspect Toolshop images
+        working-directory: toolshop-app
+        run: |
+          uname -m
+          docker compose -f docker-compose.prod.yml config | grep -E "image:|platform:"
+          docker compose -f docker-compose.prod.yml pull
+          for img in $(docker compose -f docker-compose.prod.yml config --images); do
+            echo -n "$img -> "; docker image inspect "$img" --format '{{.Os}}/{{.Architecture}}'
+          done
+
+      # -------------------------------------------------------------------
+      # FIX STEP (Option 1): Turn on the QEMU chip translator
+      # -------------------------------------------------------------------
+      - name: Set up QEMU (Architecture Emulator)
+        uses: docker/setup-qemu-action@v3
+
+      - name: Start Toolshop Docker environment
+        working-directory: toolshop-app
+        env:
+          SPRINT: sprint5
+          DISABLE_LOGGING: "true"
+        run: docker compose -f docker-compose.prod.yml up --pull missing -d
+
+      - name: Wait for database and initialize Toolshop
+        working-directory: toolshop-app
+        env:
+          SPRINT: sprint5
+          DISABLE_LOGGING: "true"
+        shell: bash
+        run: |
+          set -e
+          for attempt in {1..12}; do
+            if docker compose -f docker-compose.prod.yml exec -T laravel-api \
+              php artisan migrate:fresh --seed; then
+              exit 0
+            fi
+            echo "Waiting for database (attempt $attempt/12)"
+            sleep 10
+          done
+          echo "Toolshop database initialization failed."
+          docker compose -f docker-compose.prod.yml logs --tail=100
+          exit 1
+
+      - name: Wait for Toolshop API and UI
+        shell: bash
+        run: |
+          set -e
+          for attempt in {1..60}; do
+            if curl -fsS http://localhost:8091/status -o /dev/null \
+              && curl -fsS http://localhost:4200/ -o /dev/null; then
+              echo "Toolshop API and UI are ready."
+              exit 0
+            fi
+            echo "Waiting for Toolshop (attempt $attempt/60)"
+            sleep 5
+          done
+          echo "Toolshop did not become ready."
+          docker compose -f toolshop-app/docker-compose.prod.yml logs --tail=100
+          exit 1
+
+      - name: Run Smoke Tests
         run: npx playwright test --config=config/playwright.config.ts
         env:
           OPENCART_BASE_URL: https://naveenautomationlabs.com/
           DUMMYJSON_BASE_URL: https://dummyjson.com
-          TOOLSHOP_UI_BASE_URL: https://practicesoftwaretesting.com
-          TOOLSHOP_API_BASE_URL: https://api.practicesoftwaretesting.com
-          TOOLSHOP_ADMIN_EMAIL: ${{secrets.TOOLSHOP_ADMIN_EMAIL}}
-          TOOLSHOP_ADMIN_PASSWORD: ${{secrets.TOOLSHOP_ADMIN_PASSWORD}}
+          TOOLSHOP_UI_BASE_URL: http://localhost:4200
+          TOOLSHOP_API_BASE_URL: http://localhost:8091
+          TOOLSHOP_ADMIN_EMAIL: ${{ secrets.TOOLSHOP_ADMIN_EMAIL }}
+          TOOLSHOP_ADMIN_PASSWORD: ${{ secrets.TOOLSHOP_ADMIN_PASSWORD }}
           PIPELINE: pr
           TEST_SCOPE: smoke
 
@@ -43,3 +114,30 @@ jobs:
         with:
           name: smoke-html-report
           path: config/reports/html/
+          if-no-files-found: warn
+
+      # -------------------------------------------------------------------
+      # DIAGNOSTIC STEP: Crash dump on failure
+      # -------------------------------------------------------------------
+      - name: Dump container state
+        if: failure()
+        working-directory: toolshop-app
+        run: |
+          docker compose -f docker-compose.prod.yml ps -a
+          docker compose -f docker-compose.prod.yml logs web
+
+      - name: Show Toolshop logs on failure
+        if: failure()
+        working-directory: toolshop-app
+        env:
+          SPRINT: sprint5
+          DISABLE_LOGGING: "true"
+        run: docker compose -f docker-compose.prod.yml logs --tail=150
+
+      - name: Stop Toolshop containers
+        if: always()
+        working-directory: toolshop-app
+        env:
+          SPRINT: sprint5
+          DISABLE_LOGGING: "true"
+        run: docker compose -f docker-compose.prod.yml down -v

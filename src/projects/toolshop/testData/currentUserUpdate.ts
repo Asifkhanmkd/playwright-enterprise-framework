@@ -1,5 +1,5 @@
-import { RegisterRequest } from "@projects/toolshop/api/models/registerRequest";
-import { UpdateUserRequest } from "@projects/toolshop/api/models/updateUserRequest";
+import { RegisterRequest } from "@projects/toolshop/models/registerRequest";
+import { UpdateUserRequest } from "@projects/toolshop/models/updateUserRequest";
 
 export function buildUpdatedUserRequest(user: RegisterRequest): UpdateUserRequest {
   return {
