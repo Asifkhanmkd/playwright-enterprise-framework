@@ -33,6 +33,25 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
+      # -------------------------------------------------------------------
+      # DIAGNOSTIC STEP: Inspect images BEFORE they start up
+      # -------------------------------------------------------------------
+      - name: Inspect Toolshop images
+        working-directory: toolshop-app
+        run: |
+          uname -m
+          docker compose -f docker-compose.prod.yml config | grep -E "image:|platform:"
+          docker compose -f docker-compose.prod.yml pull
+          for img in $(docker compose -f docker-compose.prod.yml config --images); do
+            echo -n "$img -> "; docker image inspect "$img" --format '{{.Os}}/{{.Architecture}}'
+          done
+
+      # -------------------------------------------------------------------
+      # FIX STEP (Option 1): Turn on the QEMU chip translator
+      # -------------------------------------------------------------------
+      - name: Set up QEMU (Architecture Emulator)
+        uses: docker/setup-qemu-action@v3
+
       - name: Start Toolshop Docker environment
         working-directory: toolshop-app
         env:
@@ -96,6 +115,16 @@ jobs:
           name: smoke-html-report
           path: config/reports/html/
           if-no-files-found: warn
+
+      # -------------------------------------------------------------------
+      # DIAGNOSTIC STEP: Crash dump on failure
+      # -------------------------------------------------------------------
+      - name: Dump container state
+        if: failure()
+        working-directory: toolshop-app
+        run: |
+          docker compose -f docker-compose.prod.yml ps -a
+          docker compose -f docker-compose.prod.yml logs web
 
       - name: Show Toolshop logs on failure
         if: failure()
